@@ -1,9 +1,13 @@
 package com.example.wdbecomerce.Product.Model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 @Table(name = "product_detail")
@@ -23,9 +27,11 @@ public class ProductDetail {
 	
 	@Column
 	private float rating;
-
-	@Column
-	private String product_code;
+	
+	@ManyToOne
+	@JoinColumn(name="product_code")
+	@JsonBackReference
+	private Product product;
 
 	public float getPrice() {
 		return price;
@@ -59,13 +65,13 @@ public class ProductDetail {
 		this.rating = rating;
 	}
 
-	public String getProduct_code() {
-		return product_code;
+	
+	public Product getProduct() {
+		return product;
 	}
 
-	public void setProduct_code(String product_code) {
-		this.product_code = product_code;
+	public void setProduct(Product product) {
+		this.product = product;
 	}
-	
-	
+
 }
