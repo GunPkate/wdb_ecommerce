@@ -21,12 +21,14 @@ public class Product {
 	@Column
 	private String name;
 	
-	@Column
-	private String skucode;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
 	@JsonManagedReference
 	private List<ProductDetail> productDetail;
+	
+	@OneToMany(mappedBy = "product", cascade = CascadeType.MERGE)
+	@JsonManagedReference
+	private List<ProductVariant> productVariant;
 
 	public String getName() {
 		return name;
@@ -36,22 +38,14 @@ public class Product {
 		this.name = name;
 	}
 
-	public String getSkuCode() {
-		return skucode;
-	}
-
-	public void setSkuCode(String skuCode) {
-		this.skucode = skuCode;
-	}
 	
 	Product() {
 		
 	}
 	
-	Product(String id, String name,String skuCode) {
+	Product(String id, String name) {
 		this.id = id;
 		this.name = name;
-		this.skucode = skuCode;
 	}
 }
 
